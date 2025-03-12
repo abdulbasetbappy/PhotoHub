@@ -19,18 +19,23 @@ export default defineEventHandler(async (event) => {
 
     const groupedImages = response.resources.reduce((acc, img) => {
       // Extract folder name from `public_id`
-      const pathParts = img.public_id.split('/');
-      const folder = pathParts.length > 1 ? pathParts[0] : 'Uncategorized';
+      const folder = img.public_id.split('/')[0]; // Extract folder name
+      const name = img.public_id.split('/').pop(); // Extract the image name
+      const size = (img.bytes / (1024 * 1024)).toFixed(2); // Accurate MB size
 
       if (!acc[folder]) acc[folder] = [];
-      
-      // Add image only if folder has less than 10 images
-      if (acc[folder].length < 10) {
-        acc[folder].push({
-          url: img.secure_url,
-          folder: folder
-        });
-      }
+
+      // ✅ No limit per folder - Include all images
+      acc[folder].push({
+        id: img.public_id,
+        url: img.secure_url,
+        name: name.split('_').pop(), // Remove timestamp from name
+        folder: folder,
+        format: img.format,
+        size:size, 
+        width: img.width,
+        height: img.height,
+      });
 
       return acc;
     }, {});

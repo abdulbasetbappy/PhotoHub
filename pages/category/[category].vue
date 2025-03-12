@@ -1,7 +1,6 @@
 <template>
   <div>
-    <nuxt-link to="/">home</nuxt-link>
-    <h1 class="text-2xl font-bold text-center my-6">Category: {{ category }}</h1>
+    <h1 class="text-4xl font-bold text-center my-4 mb-4 text-secondary font-serif">{{ category }}</h1>
     <GalleryGrid v-if="images.length" :title="category" :images="images" :showSearch="true" />
     <p v-else>No images found in this category.</p>
   </div>
