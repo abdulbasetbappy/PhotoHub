@@ -1,6 +1,7 @@
 <template>
   <Loading v-if="isLoading || status === 'pending'" />
   <div class="container flex flex-col items-center gap-4 pt-2 pb-8">
+    
     <div class="flex justify-end gap-4 items-center mr-8">
       <LogoutButton />
       <NuxtLink
@@ -10,9 +11,11 @@
         Manage Deletion
       </NuxtLink>
     </div>
+  
     <div class="flex flex-row items-start justify-center gap-12">
+      
       <div class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow">
-        <h2 class="text-xl font-bold mb-4">Upload Image</h2>
+        <h2 class="text-xl font-bold mb-4 text-secondary">Upload Image</h2>
 
         <!-- Folder Selection -->
         <select v-model="selectedFolder" class="w-full p-2 border rounded mb-4">

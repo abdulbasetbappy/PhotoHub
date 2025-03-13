@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow">
-    <h2 class="text-xl font-bold mb-4">Create a New Folder</h2>
+    <h2 class="text-xl font-bold mb-4 text-secondary">Create Folder</h2>
 
     <!-- Folder Name Input -->
     <input 

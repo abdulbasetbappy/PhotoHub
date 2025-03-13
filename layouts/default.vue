@@ -1,7 +1,7 @@
 <template>
-    <div >
+    <div class="min-h-[100dvh] flex flex-col justify-between">
         <Header/>
-       <div class="container mx-auto min-h-[100dvh] flex flex-col justify-between">
+       <div class="container mx-auto">
         <slot/>
        </div>
        <Footer/>
