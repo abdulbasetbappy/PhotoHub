@@ -125,15 +125,17 @@ const uploadImage = async () => {
 
     if (result.url) {
       alert("✅ Upload Successful!");
+          imageName.value = '',
+            selectedFile.value = null,
+            selectedFolder.value = null,
+            imagePreview.value = null,
     } else {
       alert("❌ Upload Failed: " + result.error);
     }
   } catch (error) {
-    console.error("❌ Upload Error:", error);
     alert("Error: " + error.message);
   } finally {
     isLoading.value = false;
-     refreshNuxtData();
   }
 };
 
