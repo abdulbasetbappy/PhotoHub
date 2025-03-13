@@ -102,6 +102,7 @@ const handleDrop = (event) => {
 };
 
 const uploadImage = async () => {
+  isLoading.value = true;
   if (!selectedFile.value || !selectedFolder.value) {
     alert('❌ Please select a file and folder');
     return;
@@ -112,11 +113,6 @@ const uploadImage = async () => {
   formData.append("folder", selectedFolder.value);
   formData.append("name", imageName.value || selectedFile.value.name);
 
-  console.log("🔹 Sending FormData:", {
-    file: selectedFile.value.name,
-    folder: selectedFolder.value,
-    name: imageName.value
-  });
 
   try {
     const response = await fetch('/api/upload', {
@@ -135,6 +131,9 @@ const uploadImage = async () => {
   } catch (error) {
     console.error("❌ Upload Error:", error);
     alert("Error: " + error.message);
+  } finally {
+    isLoading.value = false;
+     refreshNuxtData();
   }
 };
 
