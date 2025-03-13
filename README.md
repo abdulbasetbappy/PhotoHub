@@ -1,75 +1,85 @@
-# Nuxt Minimal Starter
+# 📸 Image Management App
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+An efficient **image storage and management** application built with **Cloudinary** for image hosting, **Supabase** for authentication, and **TailwindCSS** for styling. This app is designed to help **data entry teams of WeTechPro** store, categorize, and reuse images effortlessly.
 
-## Setup
+## 🚀 Features
 
-Make sure to install dependencies:
+- **Authentication** 🔑: Secure login with Supabase.
+- **Image Storage & Retrieval** 🖼️: Store images in Cloudinary with category-based organization.
+- **Category Management** 📂: Create and manage categories dynamically.
+- **Admin Panel** 🛠️: Upload, delete, and organize images easily.
+- **Download & View Images** 👀: Preview and download images directly.
+- **Protected Routes** 🔒: Secure access to critical admin features.
 
-```bash
-# npm
-npm install
+## 🛠️ Built With
 
-# pnpm
-pnpm install
+- **Nuxt.js** – Vue-powered frontend framework
+- **Supabase** – Authentication & database
+- **Cloudinary** – Image hosting & management
+- **TailwindCSS** – Modern UI styling
 
-# yarn
-yarn install
+## 📂 API Endpoints
 
-# bun
-bun install
-```
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/route` | `GET` | Fetch all images categorized by folders |
+| `/category/:categoryName` | `GET` | Fetch images from a specific category |
+| `/auth` | `POST` | Authenticate and log in to the admin panel |
+| `/upload` | `POST` | Upload an image with a category name (Protected) |
+| `/deletion` | `DELETE` | Delete images or folders (Protected) |
 
-## Development Server
+## 🔐 Protected Routes
 
-Start the development server on `http://localhost:3000`:
+- `/upload` – Only authenticated users can upload images.
+- `/deletion` – Only admins can delete images and folders.
 
-```bash
-# npm
-npm run dev
+## 🎨 UI Components
 
-# pnpm
-pnpm dev
+- **Image Card**: Displays images with details, **view**, and **download** buttons.
+- **Admin Panel**: Manage categories, upload new images, and delete existing images.
 
-# yarn
-yarn dev
+## 📌 How to Use
 
-# bun
-bun run dev
-```
+1. **Log in** via `/auth` to access the admin panel.
+2. **Upload images** under different categories.
+3. **View and download images** from the gallery.
+4. **Delete images and folders** via the deletion panel.
 
-## Production
+## 📦 Installation
 
-Build the application for production:
+1. Clone the repository:
+   ```bash
+        git clone https://github.com/yourusername/your-repo.git
+        cd your-repo
+    ```
+2. Install dependencies:
+    ```bash
+        npm install
+    ```
+3. Set up environment variables (.env):
+    ```bash
+        CLOUDINARY_CLOUD_NAME=your-cloud-name
+        CLOUDINARY_API_KEY=your-api-key
+        CLOUDINARY_API_SECRET=your-api-secret
 
-```bash
-# npm
-npm run build
+        SUPABASE_URL=your-supabase-url
+        SUPABASE_ANON_KEY=your-supabase-key
+    ```
+4. Run the development server:
+    ```bash
+        npm run dev
+    ```
+## 📄 License
+This project is open-source and available under the **MIT License**.
 
-# pnpm
-pnpm build
 
-# yarn
-yarn build
+---
 
-# bun
-bun run build
-```
+### 🔹 **Customizations You Can Add:**
+- Replace `yourusername/your-repo` with your GitHub repository link.
+- Add **screenshots** of the app for better documentation.
+- Include **a demo link** if you have deployed the app.
 
-Locally preview production build:
+Let me know if you need modifications! 🚀💡
 
-```bash
-# npm
-npm run preview
 
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
