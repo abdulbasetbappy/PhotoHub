@@ -1,5 +1,7 @@
 # 📸 Image Management App
 
+![Cover Image](https://github.com/abdulbasetbappy/PhotoHub/blob/master/public/CoverImage.png?raw=true)  
+
 An efficient **image storage and management** application built with **Cloudinary** for image hosting, **Supabase** for authentication, and **TailwindCSS** for styling. This app is designed to help **data entry teams of WeTechPro** store, categorize, and reuse images effortlessly.
 
 🚀 **Live Demo**: [Photo Hub](https://photo-hub-one.vercel.app/)  
