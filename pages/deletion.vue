@@ -7,8 +7,8 @@
       Manage Image
     </NuxtLink>
   </div>
-  <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow">
-    <h2 class="text-2xl font-bold mb-6 text-center">Manage Deletion</h2>
+  <div class=" mx-auto p-6 bg-white rounded-lg shadow">
+    <h2 class="text-4xl font-bold mb-6 text-secondary font-serif text-center">Manage Deletion</h2>
 
     <div class="grid grid-cols-2 gap-6">
       <!-- Delete Folder Section -->
@@ -21,11 +21,15 @@
               Delete
             </button>
           </li>
+          <!--Loading if status pending-->
+          <li v-if="status === 'pending'">
+            Loading...
+          </li>
         </ul>
       </div>
 
       <!-- Delete Image Section -->
-      <div class="p-4 border rounded-lg">
+      <div class="p-4 border rounded-lg w-96">
         <h3 class="text-xl font-semibold mb-4">Delete Images</h3>
         <select v-model="selectedFolder" @change="fetchImages" class="w-full p-2 border rounded mb-4">
           <option value="" disabled>Select Folder</option>
@@ -34,17 +38,24 @@
           </option>
         </select>
 
-        <div v-if="folderImages.length">
-          <ul>
-            <li v-for="img in folderImages" :key="img.public_id" class="flex justify-between items-center mb-2">
-              <span>{{ img.public_id.split("/").pop().split('_').pop() }}</span>
-              <button class="bg-red-600 text-white px-3 py-1 rounded" @click="deleteImage(img.public_id)">
-                Delete
-              </button>
-            </li>
-          </ul>
-        </div>
-        <p v-else-if="selectedFolder">No images found in this folder.</p>
+        <div v-if="imageloading" class="text-center text-gray-600">
+  <p>Loading...</p>
+</div>
+<div v-else-if="folderImages.length">
+  <ul>
+    <li v-for="img in folderImages" :key="img.public_id" class="flex justify-between items-center mb-2">
+      <div class="flex items-center gap-2">
+        <img :src="img.url" alt="Image" class="w-16 h-16 object-cover rounded-lg">
+        <span>{{ img.public_id.split("/").pop().split('_').pop() }}</span>
+      </div>
+      <button class="bg-red-600 text-white px-3 py-1 rounded" @click="deleteImage(img.public_id)">
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>
+<p v-else class="text-gray-500">No images found in this folder.</p>
+
       </div>
     </div>
 
@@ -65,6 +76,7 @@ const errorMessage = ref('');
 const router = useRouter();
 const { $supabase } = useNuxtApp();
 const isLoading = ref(true);
+const imageloading = ref(false);
 // Check authentication manually on component mount
 onMounted(async () => {
   const { data, error } = await $supabase.auth.getUser();
@@ -76,8 +88,9 @@ onMounted(async () => {
     execute();
   }
 });
+
 // Fetch folders from API
-const { data, refresh, execute } = useFetch('/api/get-folders',{ immediate: false });
+const { data, refresh, execute, status } = useFetch('/api/get-folders',{ immediate: false });
 
 watchEffect(() => {
   if (data.value) {
@@ -88,16 +101,21 @@ watchEffect(() => {
 // Fetch images from a selected folder
 const fetchImages = async () => {
   if (!selectedFolder.value) return;
-
+  imageloading.value = true;
+  const folderNameConverter = selectedFolder.value;
   try {
-    const response = await fetch(`/api/get-images?folder=${selectedFolder.value}`);
+    const response = await fetch(`/api/get-images?folder=${folderNameConverter}`);
     const result = await response.json();
+    console.log(result);
     folderImages.value = result.images || [];
   } catch (error) {
     console.error(error);
     errorMessage.value = "Failed to fetch images.";
+  } finally {
+    imageloading.value = false;
   }
 };
+
 
 // Delete a folder with all images
 const deleteFolder = async (folderName) => {

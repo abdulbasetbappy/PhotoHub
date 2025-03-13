@@ -59,7 +59,7 @@ const filteredImages = computed(() => {
     return Object.fromEntries(
       Object.entries(groupedImages.value || {}).map(([folder, images]) => [
         folder,
-        images.slice(0, 8), // Limit to 8 images per folder
+        images.slice(0, 5), // Limit to 8 images per folder
       ])
     );
   }

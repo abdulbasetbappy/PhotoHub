@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const response = await cloudinary.search
-      .expression(`folder:${folder}`)
+      .expression(`folder:"${folder}/*"`)
       .execute();
 
     return { images: response.resources.map(img => ({ public_id: img.public_id, url: img.secure_url })) };

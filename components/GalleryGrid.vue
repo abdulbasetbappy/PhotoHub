@@ -9,10 +9,10 @@
     </div>
 
     <div v-if="Array.isArray(imagesArray) && filteredImages.length"
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
       <div v-for="image in filteredImages" :key="image.url" class="bg-white rounded-lg shadow-sm  overflow-hidden">
         <div class="relative group rounded-lg overflow-hidden">
-          <NuxtImg preload :src="image.url" alt="WeTechPro Images" class="w-full h-60 object-cover shadow-md" />
+          <NuxtImg preload :src="image.url" alt="WeTechPro Images" class="object-contain w-full h-56 shadow-md" />
           <div
             class="absolute inset-0 bg-[#8079F5] bg-opacity-50 flex flex-row items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-2 gap-4">
             <!-- View Button -->
@@ -24,7 +24,7 @@
 
             <!-- Download Button -->
             <button @click="downloadImage(image.url)"
-              class="text-white text-base font-semibold bg-[#4f4d88] px-2 py-1 rounded-lg hover:bg-[#8079f5] transition">
+              class="text-white text-base flex items-center gap-1 font-semibold bg-[#4f4d88] px-2 py-1 rounded-lg hover:bg-[#8079f5] transition">
               <span>Download</span>
               <Icon name="mage:save-floppy" class="w-4 h-4" />
             </button>
